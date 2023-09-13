@@ -1,0 +1,20 @@
+
+const String icAppLogo = "assets/icons/5465858.png";
+const String imgBackground = "assets/images/background.jpeg";
+const icFacebook = "assets/images/icFacebook.jpg";
+const icGoogle = "assets/images/icGoogle.png";
+const icTwitter = "assets/images/icTwitter.png";
+const email = "Email";
+const emailHint = "admin@admin.com";
+const password = "Password";
+const passwordHint = "12345678";
+const retypePassword = "Retype password";
+const name = "Name";
+const nameHint = "admin";
+const forgetPass = "Forget password";
+const login = "Log in";
+const signup = "Sign up";
+const createNewAccount = "Or, create a new account ";
+const loginWith = "Log in with";
+const privacyPolicy = "Privacy Policy";
+const termAndCond = "Term and Conditions";
