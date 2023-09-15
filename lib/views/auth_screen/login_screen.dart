@@ -2,7 +2,7 @@ import 'package:chat_app/const/colors.dart';
 import 'package:chat_app/const/consts.dart';
 import 'package:chat_app/const/list.dart';
 import 'package:chat_app/views/auth_screen/signup_screen.dart';
-import 'package:chat_app/views/home_screen/home_screen.dart';
+import 'package:chat_app/views/home_screen/home.dart';
 import 'package:chat_app/widget_common/applogo_widget.dart';
 import 'package:chat_app/widget_common/bg_widget.dart';
 import 'package:chat_app/widget_common/custom_textfield.dart';
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   5.heightBox,
                   ourButton(color: redColor,title: login,textColor: whiteColor,onPress: (){
-                    Get.to(()=> const HomeScreen());
+                    Get.to(()=> const Home());
                   }).box.width(context.screenWidth-50).make(),
                   5.heightBox,
                   createNewAccount.text.color(fontGrey).make(),

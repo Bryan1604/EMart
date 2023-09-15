@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget ourButton({onPress, color, textColor,String? title }){
+Widget ourButton( {color, onPress,textColor,String? title }){
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
       primary: color,

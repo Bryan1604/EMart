@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../const/colors.dart';
 import '../../const/consts.dart';
-import '../../const/list.dart';
+// import '../../const/list.dart';
 import '../../widget_common/applogo_widget.dart';
 import '../../widget_common/bg_widget.dart';
 import '../../widget_common/custom_textfield.dart';
