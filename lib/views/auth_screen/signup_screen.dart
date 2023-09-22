@@ -1,4 +1,7 @@
+import 'package:chat_app/controller/auth_controller.dart';
+import 'package:chat_app/views/home_screen/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -19,6 +22,13 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool? isChecked = false;
+  var controller = Get.put(AuthController());
+  //Text controller
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var passwordRetypeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -34,10 +44,10 @@ class _SignupScreenState extends State<SignupScreen> {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(hint: nameHint,title: name),
-                  customTextField(hint: emailHint,title: email),
-                  customTextField(hint: passwordHint, title: password),
-                  customTextField(hint: passwordHint, title: retypePassword),
+                  customTextField(hint: nameHint,title: name, controller: nameController, isPass: false),
+                  customTextField(hint: emailHint,title: email, controller: emailController, isPass: false),
+                  customTextField(hint: passwordHint, title: password, controller: passwordController, isPass: true),
+                  customTextField(hint: passwordHint, title: retypePassword,controller: passwordRetypeController, isPass: true),
                  
                   10.heightBox,
                   Row(
@@ -55,7 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       5.heightBox,
                       Expanded(
                         child: RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             children: [
                               TextSpan(
                                 text: "I agree to the ",
@@ -89,7 +99,21 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   5.heightBox,
-                  ourButton(color: isChecked == true? redColor: lightGrey,title: signup,textColor: whiteColor,onPress: (){}).box.width(context.screenWidth-50).make(),
+                  ourButton(color: isChecked == true? redColor: lightGrey,title: signup,textColor: whiteColor,onPress: () async{
+                    if(isChecked != false){
+                      try{
+                        await controller.signupMethod(context: context, email: emailController.text, password: passwordController.text).then((value){
+                          return controller.storeUserData(
+                            email: emailController.text, 
+                            password: passwordController.text,
+                            name: nameController.text );
+                        }).then((value){
+                          VxToast.show(context, msg: "Logged in successfull");
+                          Get.offAll(()=>Home());
+                        });
+                      }catch(e){}
+                    }
+                  }).box.width(context.screenWidth-50).make(),
                   5.heightBox,
                   
                   RichText(
