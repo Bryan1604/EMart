@@ -1,6 +1,7 @@
 import 'package:chat_app/const/colors.dart';
 import 'package:chat_app/const/consts.dart';
 import 'package:chat_app/const/list.dart';
+import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/views/auth_screen/signup_screen.dart';
 import 'package:chat_app/views/home_screen/home.dart';
 import 'package:chat_app/widget_common/applogo_widget.dart';
@@ -8,7 +9,7 @@ import 'package:chat_app/widget_common/bg_widget.dart';
 import 'package:chat_app/widget_common/custom_textfield.dart';
 import 'package:chat_app/widget_common/our_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -16,6 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
     return bgWidget(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -29,15 +31,23 @@ class LoginScreen extends StatelessWidget {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(hint: emailHint,title: email),
-                  customTextField(hint: passwordHint, title: password),
+                  customTextField(hint: emailHint,title: email, isPass: false, controller: controller.emailController),
+                  customTextField(hint: passwordHint, title: password,isPass: true, controller: controller.passwordController),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(onPressed: (){}, child: forgetPass.text.make()),
                   ),
                   5.heightBox,
-                  ourButton(color: redColor,title: login,textColor: whiteColor,onPress: (){
-                    Get.to(()=> const Home());
+                  ourButton(color: redColor,title: login,textColor: whiteColor,onPress: () async{
+                    await controller.loginMethod(context: context).then((value){
+                      if(value != null){
+                        VxToast.show(context, msg: "Logged in successfull");
+                        Get.to( const Home());
+                      }
+                      // else{
+                      //   VxToast.show(context, msg: "Logged in unsuccessfull");
+                      // }
+                    });
                   }).box.width(context.screenWidth-50).make(),
                   5.heightBox,
                   createNewAccount.text.color(fontGrey).make(),
