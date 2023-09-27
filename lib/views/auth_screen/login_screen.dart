@@ -14,10 +14,12 @@ import 'package:velocity_x/velocity_x.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(AuthController());
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
     return bgWidget(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -31,22 +33,24 @@ class LoginScreen extends StatelessWidget {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(hint: emailHint,title: email, isPass: false, controller: controller.emailController),
-                  customTextField(hint: passwordHint, title: password,isPass: true, controller: controller.passwordController),
+                  customTextField(hint: emailHint,title: email, isPass: false, controller: emailController),
+                  customTextField(hint: passwordHint, title: password,isPass: true, controller: passwordController),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(onPressed: (){}, child: forgetPass.text.make()),
                   ),
                   5.heightBox,
                   ourButton(color: redColor,title: login,textColor: whiteColor,onPress: () async{
-                    await controller.loginMethod(context: context).then((value){
-                      if(value != null){
+                    await controller.loginMethod(context: context, email: emailController.text, password: passwordController.text).then((value){
+                      if(value != null ){
+                        print(value);
                         VxToast.show(context, msg: "Logged in successfull");
                         Get.to( const Home());
                       }
-                      // else{
-                      //   VxToast.show(context, msg: "Logged in unsuccessfull");
-                      // }
+                      else{
+                        VxToast.show(context, msg: "Logged in unsuccessfull");
+                        print("hi");
+                      }
                     });
                   }).box.width(context.screenWidth-50).make(),
                   5.heightBox,

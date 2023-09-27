@@ -10,14 +10,13 @@ class AuthController extends GetxController{
   var passwordController = TextEditingController();
 
   //login method
-  Future<UserCredential?> loginMethod({context}) async{
+  Future<UserCredential?> loginMethod({context, email, password}) async{
     UserCredential? userCredential;
     try{
-      await auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
 
     }on FirebaseAuthException catch(e){
       VxToast.show(context, msg: e.toString());
-
     }
     return userCredential;
   }
@@ -40,7 +39,8 @@ class AuthController extends GetxController{
       'name':name,
       'password': password,
       'email': email,
-      'imageUrl': ''
+      'imageUrl': '',
+      'id': currentUser!.uid,
     });
   }
 
