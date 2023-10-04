@@ -18,11 +18,11 @@ class CategoryScreen extends StatelessWidget {
           shadowColor: whiteColor.withAlpha(0),
         ),
         body: Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: GridView.builder(
             shrinkWrap: true,
             itemCount: 9,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,mainAxisSpacing: 8,crossAxisSpacing: 8,mainAxisExtent: 200), itemBuilder: (context,index){
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,mainAxisSpacing: 8,crossAxisSpacing: 8,mainAxisExtent: 200), itemBuilder: (context,index){
             return Column(
               children: [
                 Image.asset(categoryList[index],width: 100,height: 150,fit: BoxFit.cover,),

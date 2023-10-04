@@ -20,7 +20,7 @@ Widget customTextField({String? title, String? hint, controller,isPass}){
           fillColor: lightGrey,
           filled: true,
           border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: redColor))
+          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: redColor))
         )
       ),
       10.heightBox

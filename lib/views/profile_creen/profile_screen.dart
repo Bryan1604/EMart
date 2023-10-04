@@ -40,12 +40,16 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       //edit profile button
                       const Align(alignment: Alignment.topRight,child: Icon(Icons.edit, color: whiteColor)).onTap(() {
+                        controller.nameController.text = data['name'];
+                        controller.passController.text = data['password'];
                         Get.to(()=> EditProfileScreen(data: data));
                       }),
                       // Profile detail
                       Row(
                         children: [
-                          Image.asset("assets/images/imgProfile.webp", width: 50,fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
+                          data['imageUrl'] != '' 
+                            ? Image.network(data['imageUrl'],width: 50,fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make() 
+                            : Image.asset("assets/images/imgProfile.webp", width: 50,fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
                           10.widthBox,
                           Expanded(
                             child: Column(
@@ -64,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             onPressed: () async{
                               await Get.put(AuthController()).signoutMethod(context);
-                              Get.offAll(()=> LoginScreen());
+                              Get.offAll(()=> const LoginScreen());
                             }, 
                             child: "Log out".text.white.make())
                           ],
