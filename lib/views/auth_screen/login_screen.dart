@@ -31,63 +31,74 @@ class LoginScreen extends StatelessWidget {
               15.heightBox,
               "Login to app".text.white.size(18).make(),
               15.heightBox,
-              Column(
-                children: [
-                  customTextField(hint: emailHint,title: email, isPass: false, controller: emailController),
-                  customTextField(hint: passwordHint, title: password,isPass: true, controller: passwordController),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(onPressed: (){}, child: forgetPass.text.make()),
-                  ),
-                  5.heightBox,
-                  ourButton(color: redColor,title: login,textColor: whiteColor,onPress: () async{
-                    await controller.loginMethod(context: context, email: emailController.text, password: passwordController.text).then((value){
-                      if(value != null ){
-                        print(value);
-                        VxToast.show(context, msg: "Logged in successfull");
-                        Get.to( const Home());
+              Obx(()=> Column(
+                  children: [
+                    customTextField(hint: emailHint,title: email, isPass: false, controller: emailController),
+                    customTextField(hint: passwordHint, title: password,isPass: true, controller: passwordController),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(onPressed: (){}, child: forgetPass.text.make()),
+                    ),
+                    5.heightBox,
+                    controller.isLoading.value
+                      ? const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(redColor),
+                      )
+                      : ourButton(
+                        color: redColor,
+                        title: login,
+                        textColor: whiteColor,
+                        onPress: (
+                        ) async{
+                          controller.isLoading(true);
+                        await controller.loginMethod(context: context, email: emailController.text, password: passwordController.text).then((value){
+                          if(value != null ){
+                            VxToast.show(context, msg: "Logged in successfull");
+                            Get.to( const Home());
+                          }
+                          else{
+                            // VxToast.show(context, msg: "Logged in unsuccessfull");
+                            controller.isLoading(false);
+                          }
+                        }
+                      );
+                    }).box.width(context.screenWidth-50).make(),
+                    5.heightBox,
+                    createNewAccount.text.color(fontGrey).make(),
+                    5.heightBox,
+                    ourButton(
+                      color: lightGolden, 
+                      title: "Sign up",
+                      textColor: whiteColor,
+                      onPress: (){
+                        Get.to(()=>const SignupScreen());
                       }
-                      else{
-                        VxToast.show(context, msg: "Logged in unsuccessfull");
-                        print("hi");
-                      }
-                    });
-                  }).box.width(context.screenWidth-50).make(),
-                  5.heightBox,
-                  createNewAccount.text.color(fontGrey).make(),
-                  5.heightBox,
-                  ourButton(
-                    color: lightGolden, 
-                    title: "Sign up",
-                    textColor: whiteColor,
-                    onPress: (){
-                      Get.to(()=>const SignupScreen());
-                    }
-                  ).box.width(context.screenWidth-50).make(),
-
-                  10.heightBox,
-                  loginWith.text.color(fontGrey).make(),
-                  5.heightBox,
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      3,
-                      (index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          backgroundColor: lightGrey,
-                          radius: 25,
-                          child: Image.asset(
-                            socialIconList[index],
-                            width: 30,
+                    ).box.width(context.screenWidth-50).make(),
+              
+                    10.heightBox,
+                    loginWith.text.color(fontGrey).make(),
+                    5.heightBox,
+              
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        3,
+                        (index) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundColor: lightGrey,
+                            radius: 25,
+                            child: Image.asset(
+                              socialIconList[index],
+                              width: 30,
+                            ),
                           ),
-                        ),
-                      )
-                      )
-                  )
-                ],
-              ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth-70).shadow5xl.make(),
+                        )
+                        )
+                    )
+                  ],
+                ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth-70).shadow5xl.make(),
+              ),
 
               
           ]),

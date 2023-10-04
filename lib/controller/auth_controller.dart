@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chat_app/const/firebase_const.dart';
 import 'package:velocity_x/velocity_x.dart';
 class AuthController extends GetxController{
-  // text Controller
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
 
+  var isLoading = false.obs; 
   //login method
   Future<UserCredential?> loginMethod({context, email, password}) async{
     UserCredential? userCredential;
@@ -41,6 +38,9 @@ class AuthController extends GetxController{
       'email': email,
       'imageUrl': '',
       'id': currentUser!.uid,
+      'cart_count': "00",
+      'wishlist_count':"00",
+      'order_count': "00"
     });
   }
 
