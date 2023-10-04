@@ -117,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                                 10.heightBox,
                                 "\$600".text.color(redColor).size(16).make()
                               ],
-                            ).box.white.roundedSM.padding(EdgeInsets.all(8)).margin(EdgeInsets.all(4)).make()),
+                            ).box.white.roundedSM.padding(const EdgeInsets.all(8)).margin(const EdgeInsets.all(4)).make()),
                           ),
                         ),
                         10.heightBox
@@ -147,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 6,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 8,

@@ -115,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   name: nameController.text );
                               }).then((value){
                                 VxToast.show(context, msg: "Logged in successfull");
-                                Get.offAll(()=>Home());
+                                Get.offAll(()=>const Home());
                               });
                             }catch(e){
                               auth.signOut();

@@ -43,7 +43,7 @@ class ItemDetail extends StatelessWidget {
                   VxRating(
                     onRatingUpdate: (value){},
                     normalColor: textfieldGrey,
-                    selectionColor: Color.fromARGB(255, 247, 228, 63),
+                    selectionColor: const Color.fromARGB(255, 247, 228, 63),
                     count: 5,
                     size: 25,
                     stepInt: true,
@@ -63,12 +63,12 @@ class ItemDetail extends StatelessWidget {
                           "In House Brands".text.color(darkFontGrey).size(16).make()
                         ],
                       )),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Icon(Icons.message_rounded),
                       )
                     ],
-                  ).box.height(60).padding(EdgeInsets.symmetric(horizontal: 16)).color(textfieldGrey).make(),
+                  ).box.height(60).padding(const EdgeInsets.symmetric(horizontal: 16)).color(textfieldGrey).make(),
 
                 // color selections
                 5.heightBox,

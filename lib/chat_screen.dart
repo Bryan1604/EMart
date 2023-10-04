@@ -8,8 +8,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  Color purple = Color(0xFF6c5ce7);
-  Color black = Color(0xFF191919);
+  Color purple = const Color(0xFF6c5ce7);
+  Color black = const Color(0xFF191919);
   TextEditingController msgInputController = TextEditingController();
   late IO.Socket socket;
 
@@ -38,35 +38,35 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index){
-                    return MessageItem(sentByMe: false,);
+                    return const MessageItem(sentByMe: false,);
                   }),
               )),
             Expanded(child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               color: Colors.blue,
               child: TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white
                 ),
                 cursorColor: purple,
                 controller: msgInputController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide:const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   suffixIcon: Container(
-                    margin: EdgeInsets.only(right: 10),
+                    margin:const EdgeInsets.only(right: 10),
                     child: IconButton(
                       onPressed: (){
                         sendMessage(msgInputController.text);
                         msgInputController.text = "";
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.send,
                         color: Colors.white,
                       ),
@@ -98,8 +98,8 @@ class MessageItem extends StatelessWidget {
     return Align(
       alignment: sentByMe?Alignment.centerRight : Alignment.centerLeft ,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
-        margin: EdgeInsets.symmetric(vertical: 5,horizontal: 10) ,
+        padding:const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 10) ,
 
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

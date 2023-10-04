@@ -14,10 +14,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(HomeController());
     var navBarItem = [
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-      BottomNavigationBarItem(icon: Icon(Icons.category), label: ""),
-      BottomNavigationBarItem(icon: Icon(Icons.card_travel ), label: ""),
-      BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+      const BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+      const BottomNavigationBarItem(icon: Icon(Icons.category), label: ""),
+      const BottomNavigationBarItem(icon: Icon(Icons.card_travel ), label: ""),
+      const BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
     ];
 
     var navBody  = [
