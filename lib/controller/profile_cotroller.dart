@@ -1,7 +1,8 @@
 import 'dart:io';
 
+// import 'package:chat_app/const/consts.dart';
 import 'package:chat_app/const/firebase_const.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,8 @@ class ProfileController extends GetxController{
   var isLoading = false.obs;
   //textfield
   var nameController = TextEditingController();
-  var passController = TextEditingController();
+  var oldpassController = TextEditingController();
+  var newpassController = TextEditingController();
 
   changeImage(context) async{
     try{
@@ -55,11 +57,21 @@ class ProfileController extends GetxController{
     }
   }
 
-  getToken() async{
-    await currentUser!.getIdToken().then(
-      (token){
-        var userToken = token;
-        print(userToken);
-      });
+  changeAuthPassword({email,password,newpassword})async{
+    final cred = EmailAuthProvider.credential(email: email, password: password);
+    await currentUser!.reauthenticateWithCredential(cred).then((value){
+      currentUser!.updatePassword(newpassword);
+
+    }).catchError((error){
+      print(error.toString());
+    });
   }
+
+  // getToken() async{
+  //   await currentUser!.getIdToken().then(
+  //     (token){
+  //       var userToken = token;
+  //       print(userToken);
+  //     });
+  // }
 }
